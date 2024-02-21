@@ -16,10 +16,26 @@ class State:
 def alpha_beta_search(state, alpha=-np.infty, beta=np.infty, depth=0, is_reversed=False):
 
     def maxValue(state, alpha, beta):
-        raise NotImplementedError
+        if state.is_terminal():
+            return state.val
+        v = -np.infty
+        for c in state.get_children(is_reversed):
+            v = max(v, minValue(c, alpha, beta))
+            if v >= beta:
+                return v
+            alpha = max(alpha, v)
+        return v
 
     def minValue(state, alpha, beta):
-        raise NotImplementedError
+        if state.is_terminal():
+            return state.val
+        v = np.infty
+        for c in state.get_children(is_reversed):
+            v = min(v, maxValue(c, alpha, beta))
+            if v <= alpha:
+                return v
+            beta = min(beta, v)
+        return v
 
     if state.is_terminal(): 
         return state.val
