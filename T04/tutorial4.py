@@ -46,11 +46,11 @@ def create_tree(tree, df, parent=None, action = ''):
 
 tree = Tree()
 create_tree(tree, loan_df)
-tree.save2file('tree.txt', line_type='ascii')
+print(tree.show(stdout=False,  line_type='ascii'))
 
 loan_noisy_df = loan_df.copy()
 loan_noisy_df.iloc[0]['Decision'] = 'Approve'
 
 tree = Tree()
 create_tree(tree, loan_noisy_df)
-tree.save2file('tree.txt', line_type='ascii')
+print(tree.show(stdout=False,  line_type='ascii'))
